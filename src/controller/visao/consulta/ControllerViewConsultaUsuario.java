@@ -12,7 +12,6 @@ import visao.remover.ViewRemoverUsuario;
 
 /**
  * Classe responsavel por ser o <b>controlador</b> da ViewConsultaUsuario.
- * @author  Leandro
  * @version 1.0
  * @since   29/10/2015
  * @see     controller.Controller
