@@ -1,11 +1,13 @@
 package visao.operacoes;
 
+import controller.visao.operacoes.ControllerViewOperacaoGerenciarUsuario;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import modelo.dao.estruturais.DaoOperacao;
 import modelo.estruturais.Operacao;
 import modelo.estruturais.Usuario;
 import visao.View;
@@ -22,13 +24,16 @@ public final class ViewOperacaoGerenciarUsuario extends ViewOperacao {
     
     private Usuario    usuario;
     
-    private List<Operacao> operacaos;
+    private List<Operacao> operacoes;
+ 
+    private final DaoOperacao daoOperacao;
     
     public ViewOperacaoGerenciarUsuario(View oViewParent) {
         super(oViewParent);
-        //this.controller = ;
+        this.controller  = new ControllerViewOperacaoGerenciarUsuario(this);
+        this.operacoes   = new ArrayList<>();
+        this.daoOperacao = new DaoOperacao();
         this.initComponents();
-        this.operacaos = new ArrayList<>();
     }
 
     @Override
@@ -79,16 +84,17 @@ public final class ViewOperacaoGerenciarUsuario extends ViewOperacao {
         this.add(this.jButtonAction2);
     }
 
+ 
     @Override
     public void clear() {
-        this.usuario = null;
-        this.operacaos      = new ArrayList<>();
+        this.usuario   = null;
+        this.operacoes = new ArrayList<>();
         
         this.jTextFieldUsuario.setText("");
         this.clearTable();
     }
 
-    public JButton getButtonSearchFornecedor() {
+    public JButton getButtonSearchUsuario() {
         return this.jButtonSearchUsuario;
     }
 
@@ -106,7 +112,9 @@ public final class ViewOperacaoGerenciarUsuario extends ViewOperacao {
     }
 
     public void setUsuario(Usuario oUsuario) {
-        this.usuario = oUsuario;
+        this.usuario   = oUsuario;
         this.jTextFieldUsuario.setText(this.usuario.toString());
+        this.operacoes = this.daoOperacao.findOperacoesByUsuario(this.usuario);
+        this.addRows(this.daoOperacao.getOperacoes(this.operacoes));
     }
 }
