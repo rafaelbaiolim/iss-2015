@@ -209,4 +209,13 @@ public class Venda implements Serializable {
     public String toString() {
         return new FunctDate().getFormattedDate(this.dataCadastro) + " - " + this.horaCadastro + " - " + this.cliente;
     }
+    public String[] getInfo() {
+        String[] sVenda    = new String[3];
+                 sVenda[0] = this.cliente.toString();
+                 sVenda[1] = new FunctDate().getFormattedDate(this.dataCadastro);
+                 sVenda[2] = Float.toString(this.valorTotal);
+        return   sVenda;
+    }
+
+
 }

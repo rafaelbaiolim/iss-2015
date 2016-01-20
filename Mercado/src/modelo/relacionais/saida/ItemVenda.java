@@ -111,4 +111,13 @@ public class ItemVenda implements Serializable {
     public String toString() {
         return this.venda + " - " + this.produto + " = " + this.quantidade;
     }
+    public String[] getInfo() {
+        String[] sInfo    = new String[3];
+                 sInfo[0] = this.produto.getDescricao().trim();
+                 sInfo[1] = Integer.toString(this.quantidade);
+                 sInfo[2] = Float.toString(this.valorUnitario);
+        return   sInfo;
+    }
+
+
 }
