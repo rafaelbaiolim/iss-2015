@@ -7,7 +7,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import modelo.gerenciais.Funcionario;
-import visao.consulta.ViewConsultaFuncionario;
+import visao.ViewModal;
 
 /**
  * Classe responsavel por definir a Interface de Edicao de Funcionarios no Sistema.
@@ -25,7 +25,7 @@ public final class ViewEditarFuncionario extends ViewEditar {
     private       JTextField              jTextFieldCargaHoraria;
     private       JTextField              jTextFieldSalario;
     private       JTextField              jTextFieldDataAdmissao;
-    private final ViewConsultaFuncionario viewConsultaFuncionario;
+    private final ViewModal               viewParent;
     private final Funcionario             funcionario;
 
     /**
@@ -33,10 +33,10 @@ public final class ViewEditarFuncionario extends ViewEditar {
      * @param oView
      * @param oFuncionario 
      */
-    public ViewEditarFuncionario(ViewConsultaFuncionario oView, Funcionario oFuncionario) {
+    public ViewEditarFuncionario(ViewModal oView, Funcionario oFuncionario) {
         super(oView);
         this.controller              = new ControllerViewEditarFuncionario(this);
-        this.viewConsultaFuncionario = oView;
+        this.viewParent = oView;
         this.funcionario             = oFuncionario;
         this.initComponents();
     }
@@ -149,8 +149,8 @@ public final class ViewEditarFuncionario extends ViewEditar {
         return this.jTextFieldDataAdmissao;
     }
 
-    public ViewConsultaFuncionario getViewConsultaFuncionario() {
-        return this.viewConsultaFuncionario;
+    public ViewModal getViewParent() {
+        return this.viewParent;
     }
     
     public Funcionario getFuncionario() {

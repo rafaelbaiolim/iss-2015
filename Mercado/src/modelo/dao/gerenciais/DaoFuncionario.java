@@ -60,6 +60,21 @@ public class DaoFuncionario extends Dao<Funcionario> {
     }
     
     /**
+     * Metodo responsavel por retornar uma Lista de Funcionarios pelo Nome, Turno e Setor.
+     * @param sNome  Nome do Funcionario.
+     * @param sTurno Turno do Funcionario.
+     * @param sSetor Setor do Funcionario.
+     * @return Lista de Funcionarios encontrados.
+     */
+    public List<Funcionario> findFuncionarios(String sNome, String sTurno, String sSetor) {
+        return acesso.createQuery("SELECT e "
+                                + "FROM Funcionario e "
+                                + "WHERE e.nome LIKE '%" + sNome.toUpperCase() + "%' "
+                                + "AND   e.turno LIKE '%" + sTurno.toUpperCase().trim() + "%'"
+                                + "AND   e.setor LIKE '%" + sSetor.toUpperCase().trim() + "%'").getResultList();
+    }
+    
+    /**
      * Metodo responsavel por retornar uma Matriz com os elementos principais dos Funcionarios.
      * @param  oFuncionarios Lista de Funcionarios a serem listados.
      * @return Matriz com os dados dos Funcionarios.

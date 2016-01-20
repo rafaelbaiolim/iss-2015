@@ -7,9 +7,11 @@ import java.awt.event.KeyEvent;
 import java.util.Date;
 import modelo.dao.gerenciais.DaoFuncionario;
 import modelo.gerenciais.Funcionario;
+import visao.consulta.ViewConsultaFuncionario;
 import visao.editar.ViewEditarFuncionario;
 import visao.mensagens.ViewErro;
 import visao.mensagens.ViewMensagem;
+import visao.operacoes.ViewOperacaoOrganizarHorarios;
 
 /**
  * Classe responsavel por ser o <b>controlador</b> da ViewEditarFuncionario.
@@ -69,7 +71,12 @@ public class ControllerViewEditarFuncionario extends ControllerViewEditar {
             this.daoFuncionario.update(oFuncionario);
             new ViewMensagem(this.viewEditarFuncionario, "Funcionário Atualizado com Sucesso!").setVisible(true);
             this.viewEditarFuncionario.dispose();
-            this.viewEditarFuncionario.getViewConsultaFuncionario().clear();
+            
+            if (this.viewEditarFuncionario.getViewParent() instanceof ViewConsultaFuncionario) {
+                ((ViewConsultaFuncionario) this.viewEditarFuncionario.getViewParent()).clear();
+            }else if (this.viewEditarFuncionario.getViewParent() instanceof ViewOperacaoOrganizarHorarios) {
+                ((ViewOperacaoOrganizarHorarios) this.viewEditarFuncionario.getViewParent()).clear();
+            }
         }
     }
     

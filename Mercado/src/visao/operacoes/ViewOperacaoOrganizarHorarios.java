@@ -1,10 +1,14 @@
 package visao.operacoes;
 
+import controller.visao.operacoes.ControllerViewOperacaoOrganizarHorarios;
 import java.awt.Dimension;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import modelo.dao.gerenciais.DaoFuncionario;
+import modelo.gerenciais.Funcionario;
 import visao.View;
 
 /**
@@ -19,10 +23,12 @@ public final class ViewOperacaoOrganizarHorarios extends ViewOperacao {
     private JComboBox  jComboBoxTurno;
     private JButton    jButtonSearch;
     private JTextField jTextFieldTotalFuncionarios;
+    private DaoFuncionario    daoFuncionario;
+    private List<Funcionario> funcionarios;
 
     public ViewOperacaoOrganizarHorarios(View oViewParent) {
         super(oViewParent);
-        //this.controller =
+        this.controller = new ControllerViewOperacaoOrganizarHorarios(this);
         this.initComponents();
     }
 
@@ -95,7 +101,55 @@ public final class ViewOperacaoOrganizarHorarios extends ViewOperacao {
         this.add(this.jButtonAction2);
         this.add(this.jButtonAction3);
     }
-
+    
     @Override
-    public void clear() {}
+    public void clear() {
+        this.funcionarios = this.daoFuncionario.list();
+        this.jTextFieldNomeFuncionario.setText("");
+        this.addRows(this.daoFuncionario.getFuncionarios(this.funcionarios));
+        this.jTextFieldTotalFuncionarios.setText(Integer.toString(this.funcionarios.size()));
+    }
+    
+    /**
+     * Metodo responsavel por atualizar os Funcionarios no View.
+     * @param oFuncionarios Funcionarios encontrados.
+     */
+    public void setFuncionarios(List<Funcionario> oFuncionarios) {
+        this.daoFuncionario = new DaoFuncionario();
+        this.funcionarios   = oFuncionarios;
+        this.addRows(this.daoFuncionario.getFuncionarios(oFuncionarios));
+        this.jTextFieldTotalFuncionarios.setText(Integer.toString(oFuncionarios.size()));
+    }
+
+    public List<Funcionario> getFuncionarios() {
+        return this.funcionarios;
+    }
+    
+    public JTextField getTextFieldNomeFuncionario() {
+        return this.jTextFieldNomeFuncionario;
+    }
+
+    public JComboBox getComboBoxSetor() {
+        return this.jComboBoxSetor;
+    }
+
+    public JComboBox getComboBoxTurno() {
+        return this.jComboBoxTurno;
+    }
+    
+    public JButton getButtonSearch() {
+        return this.jButtonSearch;
+    }
+    
+    public JButton getButtonEditar() {
+        return this.jButtonAction1;
+    }
+
+    public JButton getButtonOk() {
+        return this.jButtonAction2;
+    }
+
+    public JButton getButtonVoltar() {
+        return this.jButtonAction3;
+    }
 }
