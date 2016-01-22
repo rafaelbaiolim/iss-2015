@@ -151,4 +151,11 @@ public class Pedido implements Serializable {
     public String toString() {
         return new FunctDate().getFormattedDate(this.dataCadastro) + " - " + this.horaCadastro + " - " + this.usuario;
     }
+    public String[] getInfo() {
+        String[] sInfo    = new String[3];
+                 sInfo[0] = Long.toString(this.id);
+                 sInfo[1] = new FunctDate().getFormattedDate(this.dataCadastro);
+                 sInfo[2] = this.horaCadastro.toString();
+        return   sInfo;
+    }
 }

@@ -111,4 +111,11 @@ public class ItemPedido implements Serializable {
     public String toString() {
         return this.pedido + " - " + this.produto + " - " + this.quantidade + " - " + this.precoUnitario;
     }
+    public String[] getInfo() {
+        String[] sInfo    = new String[3];
+                 sInfo[0] = this.produto.getDescricao().trim();
+                 sInfo[1] = Integer.toString(this.quantidade);
+                 sInfo[2] = Float.toString(this.precoUnitario);
+        return   sInfo;
+    }
 }
