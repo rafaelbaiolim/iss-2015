@@ -3,6 +3,7 @@ package controller.visao.cadastro;
 import java.awt.event.ActionEvent;
 import controller.visao.ControllerViewModal;
 import java.awt.event.KeyEvent;
+import visao.ajuda.ViewAjudaCadastro;
 import visao.cadastro.ViewCadastro;
 
 /**
@@ -32,6 +33,8 @@ public abstract class ControllerViewCadastro extends ControllerViewModal {
             this.viewCadastro.clear();
         }else if (oActionEvent.getSource().equals(this.viewCadastro.getButtonBack())) {
             this.viewCadastro.dispose();
+        }else if (oActionEvent.getSource().equals(this.viewCadastro.getButtonAjuda())) {
+            new ViewAjudaCadastro(this.viewCadastro).setVisible(true);
         }
     }
     
@@ -44,6 +47,8 @@ public abstract class ControllerViewCadastro extends ControllerViewModal {
             this.viewCadastro.clear();
         }else if (oKeyEvent.getKeyCode() == KeyEvent.VK_F3) {
             this.viewCadastro.dispose();
+        }else if (oKeyEvent.getKeyCode() == KeyEvent.VK_F4) {
+            new ViewAjudaCadastro(this.viewCadastro).setVisible(true);
         }
     }
     

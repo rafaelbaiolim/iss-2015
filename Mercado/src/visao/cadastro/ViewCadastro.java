@@ -4,9 +4,11 @@ import funct.FunctFrame;
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import modelo.estruturais.Usuario;
 import visao.InterfaceView;
 import visao.View;
 import visao.ViewModal;
+import visao.estruturais.ViewMenu;
 
 /**
  * Classe responsavel por definir a Interface de Cadastro do Sistema.
@@ -15,8 +17,10 @@ import visao.ViewModal;
  * @since   19/10/2015
  */
 public abstract class ViewCadastro extends ViewModal implements InterfaceView {
-    private   JLabel header;
-    protected JLabel message;
+    private   JLabel  header;
+    protected JLabel  message;
+    protected JButton jButtonAjuda;
+    private final ViewMenu viewMenu;
 
     /**
      * Metodo construtor, que recebe como parametro a View Parent.
@@ -25,6 +29,7 @@ public abstract class ViewCadastro extends ViewModal implements InterfaceView {
      */
     public ViewCadastro(View oView) {
         super(oView);
+        this.viewMenu = (ViewMenu) oView;
     }
     
     /**
@@ -71,10 +76,12 @@ public abstract class ViewCadastro extends ViewModal implements InterfaceView {
         this.jButtonAction1 = this.createButton(" Inserir ", "add.jpg");
         this.jButtonAction2 = this.createButton("  Limpar ", "clear.jpg");
         this.jButtonAction3 = this.createButton("  Voltar ", "back.jpg");
+        this.jButtonAjuda   = this.createButton(""         , "help.jpg");
         
         this.add(this.jButtonAction1);
         this.add(this.jButtonAction2);
         this.add(this.jButtonAction3);
+        this.add(this.jButtonAjuda);
     }
     
     @Override
@@ -114,5 +121,18 @@ public abstract class ViewCadastro extends ViewModal implements InterfaceView {
      */
     public JButton getButtonBack() {
         return this.jButtonAction3;
+    }
+    
+    /**
+     * Metodo responsavel por retornar o Botao Ajuda da View Cadastro.
+     * @since   19/10/2015
+     * @return  JButton
+     */
+    public JButton getButtonAjuda() {
+        return this.jButtonAjuda;
+    }
+    
+    public Usuario getUsuario() {
+        return this.viewMenu.getUsuario();
     }
 }
