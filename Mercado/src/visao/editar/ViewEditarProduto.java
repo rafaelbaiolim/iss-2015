@@ -73,6 +73,7 @@ public final class ViewEditarProduto extends ViewEditar {
         
         this.jTextFieldQuantidade    = this.createTextField(4);
         this.jTextFieldQuantidade.setText(Integer.toString(this.produto.getQuantidade()));
+        this.jTextFieldQuantidade.setEditable(false);
         this.add(new JLabel("Quantidade*: "));
         this.add(this.jTextFieldQuantidade);
         
