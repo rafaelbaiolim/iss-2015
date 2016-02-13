@@ -10,6 +10,10 @@
     padding-left: 250px;
 }
 
+span.glyphicon{
+    padding-right: 8px;
+}
+
 #sidebar-wrapper {
     z-index: 1000;
     position: fixed;
@@ -60,6 +64,12 @@
 .sidebar-nav li {
     text-indent: 20px;
     line-height: 40px;
+}
+
+.sidebar-nav li:not(:first-child) {
+    background:#E87833;
+    margin-bottom: 1px;
+    
 }
 
 .sidebar-nav li a {
