@@ -3,6 +3,10 @@ package controller.visao.operacoes;
 import controller.visao.ControllerViewModal;
 import java.awt.event.ActionEvent;
 import modelo.dao.cadastrais.DaoCliente;
+import modelo.dao.estruturais.DaoAcao;
+import modelo.dao.estruturais.DaoOperacao;
+import modelo.estruturais.Operacao;
+import visao.ajuda.ViewAjudaRealizarNotificacoes;
 import visao.mensagens.ViewErro;
 import visao.mensagens.ViewMensagem;
 import visao.operacoes.ViewOperacaoRealizarNotificacao;
@@ -38,15 +42,18 @@ public class ControllerViewOperacaoRealizarNotificacao extends ControllerViewMod
             this.viewOperacaoRealizarNotificacao.removeClientes();
         }else if (oActionEvent.getSource().equals(this.viewOperacaoRealizarNotificacao.getButtonNotificar())) {
             if (this.checkParameters() == true) {
+                new DaoOperacao().insert(new Operacao("Clientes Notificados = " + this.viewOperacaoRealizarNotificacao.getClientes().size(), new DaoAcao().get(30L), this.viewOperacaoRealizarNotificacao.getUsuario()));
                 new ViewMensagem(this.viewOperacaoRealizarNotificacao, "Notificacao enviada com Sucesso!").setVisible(true);
                 this.viewOperacaoRealizarNotificacao.clear();
             }
-        }else if (oActionEvent.getSource().equals(this.viewOperacaoRealizarNotificacao.getjButtonCancelar())) {
+        }else if (oActionEvent.getSource().equals(this.viewOperacaoRealizarNotificacao.getButtonCancelar())) {
             this.viewOperacaoRealizarNotificacao.dispose();
+        }else if (oActionEvent.getSource().equals(this.viewOperacaoRealizarNotificacao.getButtonAjuda())) {
+            new ViewAjudaRealizarNotificacoes(this.viewOperacaoRealizarNotificacao).setVisible(true);
         }
     }
     
-    private boolean checkParameters() {
+    public boolean checkParameters() {
         if (this.viewOperacaoRealizarNotificacao.getClientes().isEmpty() == true) {
             new ViewErro(this.viewOperacaoRealizarNotificacao, "Nenhum Cliente Selecionado!").setVisible(true);
             return false;

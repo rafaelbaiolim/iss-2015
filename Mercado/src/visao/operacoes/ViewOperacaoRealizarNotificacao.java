@@ -12,7 +12,9 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import modelo.cadastrais.Cliente;
 import modelo.dao.cadastrais.DaoCliente;
+import modelo.estruturais.Usuario;
 import visao.View;
+import visao.estruturais.ViewMenu;
 
 /**
  * Classe responsavel por definir a Interface para Realizar Notificacoes aos Clientes do Sistema.
@@ -28,10 +30,12 @@ public final class ViewOperacaoRealizarNotificacao extends ViewOperacao {
     private JTextField jTextFieldTotalClientes;
     private JTextArea  jTextAreaMensagem;
     private final DaoCliente daoCliente;
-    private List<Cliente> clientes;
+    private List<Cliente>    clientes;
+    private final ViewMenu   viewMenu;
 
     public ViewOperacaoRealizarNotificacao(View oViewParent) {
         super(oViewParent);
+        this.viewMenu   = (ViewMenu) oViewParent;
         this.controller = new ControllerViewOperacaoRealizarNotificacao(this);
         this.daoCliente = new DaoCliente();
         this.initComponents();
@@ -57,14 +61,21 @@ public final class ViewOperacaoRealizarNotificacao extends ViewOperacao {
     public void addComponents() {
         
         this.addTable();
-        String[] sDados = {"Documento", "Nome", "Email"};
+        String[] sDados = {"Id", "Documento", "Nome"};
         this.setColumns(sDados);
         this.jScrollPane.setPreferredSize(new Dimension(350, 150));
         
-        this.jButtonAddCliente    = this.createButton("Adicionar", "add.jpg");
+        int[]    iColumns = {75, 175, 175};
+        this.setColumnSize(iColumns);
+        
+        this.jButtonAddClientes    = this.createButton("", "add_clientes.jpg");
+        this.add(this.jButtonAddClientes);
+        this.jButtonAddCliente     = this.createButton("Adicionar", "add.jpg");
         this.add(this.jButtonAddCliente);
-        this.jButtonRemoveCliente = this.createButton(" Remover ", "exit.jpg");
+        this.jButtonRemoveCliente  = this.createButton(" Remover ", "exit.jpg");
         this.add(this.jButtonRemoveCliente);
+        this.jButtonRemoveClientes = this.createButton("", "remove_clientes.jpg");
+        this.add(this.jButtonRemoveClientes);
         
         this.addLinhas(1);
         
@@ -85,14 +96,16 @@ public final class ViewOperacaoRealizarNotificacao extends ViewOperacao {
     
     @Override
     public void addButtons() {
-        this.jButtonAction2 = this.createButton("  Ok  ", "ok.jpg");
-        this.jButtonAction3 = this.createButton("Voltar", "back.jpg");
+        this.jButtonAction1 = this.createButton("Notificar", "email.jpg");
+        this.jButtonAction2 = this.createButton(" Cancelar", "back.jpg");
+        this.jButtonAction3 = this.createButton(""         , "help.jpg");
         
+        this.add(this.jButtonAction1);
         this.add(this.jButtonAction2);
         this.add(this.jButtonAction3);
     }
 
-@Override
+    @Override
     public void clear() {
         this.addClientes();
         this.jTextAreaMensagem.setText("");
@@ -137,7 +150,15 @@ public final class ViewOperacaoRealizarNotificacao extends ViewOperacao {
         this.addRows(this.daoCliente.getClientes(this.clientes));
         this.jTextFieldTotalClientes.setText(Integer.toString(this.clientes.size()));
     }
+    
+    public void setMessage(String sMessage) {
+        this.jTextAreaMensagem.setText(sMessage);
+    }
 
+    public void setClientes(List<Cliente> oClientes) {
+        this.clientes = oClientes;
+    }
+    
     public List<Cliente> getClientes() {
         return this.clientes;
     }
@@ -166,7 +187,15 @@ public final class ViewOperacaoRealizarNotificacao extends ViewOperacao {
         return this.jButtonAction1;
     }
 
-    public JButton getjButtonCancelar() {
+    public JButton getButtonCancelar() {
         return this.jButtonAction2;
+    }
+    
+    public JButton getButtonAjuda() {
+        return this.jButtonAction3;
+    }
+    
+    public Usuario getUsuario() {
+        return this.viewMenu.getUsuario();
     }
 }
