@@ -4,21 +4,20 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
-		<![CDATA[SELECT descricao, marca, preco_unitario, quantidade
-FROM produto
-WHERE quantidade > 0
-ORDER BY descricao;]]>
+		<![CDATA[SELECT nome, cpf, setor, turno
+FROM funcionario
+ORDER BY nome, cpf;]]>
 	</queryString>
-	<field name="descricao" class="java.lang.String">
+	<field name="nome" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="marca" class="java.lang.String">
+	<field name="cpf" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="preco_unitario" class="java.lang.Float">
+	<field name="setor" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="quantidade" class="java.lang.Integer">
+	<field name="turno" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<background>
@@ -33,26 +32,26 @@ ORDER BY descricao;]]>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="56" splitType="Stretch">
+		<band height="58" splitType="Stretch">
 			<staticText>
-				<reportElement x="125" y="7" width="263" height="27" uuid="5bae0412-e547-4e1b-81e5-f5cac5541397"/>
+				<reportElement x="166" y="8" width="194" height="27" uuid="5bae0412-e547-4e1b-81e5-f5cac5541397"/>
 				<textElement textAlignment="Center">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Relatório de Produtos em Estoque]]></text>
+				<text><![CDATA[Relatório de Funcionários]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="449" y="34" width="60" height="20" uuid="7b9b3d02-d9d3-429f-9608-5f61f1ae9292"/>
+				<reportElement x="449" y="37" width="60" height="20" uuid="7b9b3d02-d9d3-429f-9608-5f61f1ae9292"/>
 				<textElement textAlignment="Justified"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="388" y="34" width="59" height="20" uuid="cea3f855-67bf-4dfd-b53e-ca300c8b5a6e"/>
+				<reportElement x="388" y="37" width="59" height="20" uuid="cea3f855-67bf-4dfd-b53e-ca300c8b5a6e"/>
 				<textElement textAlignment="Justified"/>
 				<text><![CDATA[Emitido em ]]></text>
 			</staticText>
 			<textField pattern="HH.mm">
-				<reportElement x="509" y="34" width="44" height="20" uuid="d458da93-580d-4b25-b7c2-9c13cc28abb7"/>
+				<reportElement x="509" y="37" width="44" height="20" uuid="d458da93-580d-4b25-b7c2-9c13cc28abb7"/>
 				<textElement textAlignment="Justified"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
@@ -65,51 +64,49 @@ ORDER BY descricao;]]>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Descrição]]></text>
+				<text><![CDATA[Nome]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="245" y="0" width="100" height="20" uuid="de30b252-ab00-41ed-85ee-01e4c2abf208"/>
 				<textElement textAlignment="Justified">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Marca]]></text>
+				<text><![CDATA[CPF]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="349" y="0" width="100" height="20" uuid="99d9a635-8e90-4f6b-bdde-d561961fc3e3"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Preço Unitário]]></text>
+				<text><![CDATA[Setor]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="452" y="0" width="100" height="20" uuid="0e0531b7-9a32-4f16-aab3-224dedece03f"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Quantidade]]></text>
+				<text><![CDATA[Turno]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="21" splitType="Stretch">
+		<band height="23" splitType="Stretch">
 			<textField>
 				<reportElement mode="Opaque" x="0" y="0" width="240" height="20" isRemoveLineWhenBlank="true" backcolor="#CCCCCC" uuid="58d975db-c57b-4bbc-8d42-fb3a6609e750"/>
-				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement mode="Opaque" x="245" y="0" width="100" height="20" isRemoveLineWhenBlank="true" backcolor="#CCCCCC" uuid="aea028fd-e4a6-4625-b9b5-ce122d4698fd"/>
 				<textElement textAlignment="Justified"/>
-				<textFieldExpression><![CDATA[$F{marca}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{cpf}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00">
+			<textField>
 				<reportElement mode="Opaque" x="350" y="0" width="100" height="20" isRemoveLineWhenBlank="true" backcolor="#CCCCCC" uuid="d595813a-8d9f-4a20-bd08-3c280ca9021a"/>
-				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[$F{preco_unitario}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{setor}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement mode="Opaque" x="455" y="0" width="100" height="20" isRemoveLineWhenBlank="true" backcolor="#CCCCCC" uuid="718a8fc9-be79-45c5-a10e-89bf8cde21a3"/>
-				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[$F{quantidade}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{turno}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement isPrintRepeatedValues="false" x="0" y="0" width="555" height="2" forecolor="#000000" backcolor="#000000" uuid="fa72f097-ec3c-4253-98cc-473f60b136ce"/>
@@ -118,40 +115,46 @@ ORDER BY descricao;]]>
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement mode="Opaque" x="0" y="0" width="240" height="20" isRemoveLineWhenBlank="true" backcolor="#999999" uuid="548cb9dd-35bb-4ed4-9e15-14d8e3f69c54">
+				<reportElement mode="Opaque" x="0" y="1" width="240" height="20" isRemoveLineWhenBlank="true" backcolor="#999999" uuid="548cb9dd-35bb-4ed4-9e15-14d8e3f69c54">
 					<printWhenExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) == 0)]]></printWhenExpression>
 				</reportElement>
-				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Opaque" x="245" y="0" width="100" height="20" isRemoveLineWhenBlank="true" backcolor="#999999" uuid="8103bd78-3238-423b-a06e-9f390b65a098">
+				<reportElement mode="Opaque" x="245" y="1" width="100" height="20" isRemoveLineWhenBlank="true" backcolor="#999999" uuid="8103bd78-3238-423b-a06e-9f390b65a098">
 					<printWhenExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) == 0)]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Justified"/>
-				<textFieldExpression><![CDATA[$F{marca}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00">
-				<reportElement mode="Opaque" x="350" y="0" width="100" height="20" isRemoveLineWhenBlank="true" backcolor="#999999" uuid="fca4b64e-3c87-4daf-9bb0-3eed600f25b7">
-					<printWhenExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) == 0)]]></printWhenExpression>
-				</reportElement>
-				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[$F{preco_unitario}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{cpf}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Opaque" x="455" y="0" width="100" height="20" isRemoveLineWhenBlank="true" backcolor="#999999" uuid="890a59d8-5945-4cac-989b-8c8b4f828c03">
+				<reportElement mode="Opaque" x="350" y="1" width="100" height="20" isRemoveLineWhenBlank="true" backcolor="#999999" uuid="fca4b64e-3c87-4daf-9bb0-3eed600f25b7">
 					<printWhenExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) == 0)]]></printWhenExpression>
 				</reportElement>
-				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[$F{quantidade}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{setor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="455" y="1" width="100" height="20" isRemoveLineWhenBlank="true" backcolor="#999999" uuid="890a59d8-5945-4cac-989b-8c8b4f828c03">
+					<printWhenExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) == 0)]]></printWhenExpression>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{turno}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="31" splitType="Stretch">
+		<band height="23" splitType="Stretch">
 			<textField>
-				<reportElement x="429" y="0" width="100" height="20" uuid="335aeb0e-f40b-480b-b09b-4258bced8bc7"/>
+				<reportElement mode="Opaque" x="454" y="3" width="100" height="20" backcolor="#999999" uuid="335aeb0e-f40b-480b-b09b-4258bced8bc7"/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="413" y="3" width="36" height="20" backcolor="#999999" uuid="503cfe48-493c-4245-8dd7-443b1c4ba7c2"/>
+				<textElement textAlignment="Justified">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total: ]]></text>
+			</staticText>
 		</band>
 	</columnFooter>
 	<pageFooter>

@@ -147,11 +147,19 @@ ORDER BY count(v.quantidade), p.descricao;]]>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="31" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement x="429" y="0" width="100" height="20" uuid="335aeb0e-f40b-480b-b09b-4258bced8bc7"/>
+				<reportElement mode="Opaque" x="457" y="0" width="100" height="20" backcolor="#999999" uuid="335aeb0e-f40b-480b-b09b-4258bced8bc7"/>
+				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="388" y="0" width="63" height="20" backcolor="#999999" uuid="0ebc92a0-8dae-436d-a4f4-9beba430e019"/>
+				<textElement textAlignment="Justified">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quantidade: ]]></text>
+			</staticText>
 		</band>
 	</columnFooter>
 	<pageFooter>
