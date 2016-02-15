@@ -29,6 +29,8 @@ public class ViewMenu extends View {
     
     private JMenu     menuCadastro;
     private JMenu     menuConsulta;
+    private JMenu     menuOperacoes;
+    private JMenu     menuRelatorios;
     private JMenu     menuSistema;
     
     //Cadastrar:
@@ -51,6 +53,23 @@ public class ViewMenu extends View {
     private JMenuItem menuItemConsultaMarca;
     private JMenuItem menuItemConsultaFuncionario;
     private JMenuItem menuItemConsultaProduto;
+    
+    //Operacoes:
+    private JMenuItem menuItemOperacoesRegistrarPedido;
+    private JMenuItem menuItemOperacoesChegadaPedido;
+    private JMenuItem menuItemOperacoesOrganizarHorario;
+    private JMenuItem menuItemOperacoesRealizarNotificacao;
+    private JMenuItem menuItemOperacoesEfetuarVenda;
+    private JMenuItem menuItemOperacoesEfetuarDevolucao;
+    private JMenuItem menuItemOperacoesGerenciarEncomenda;
+    private JMenuItem menuItemOperacoesGerenciarProduto;
+    private JMenuItem menuItemOperacoesGerenciarUsuario;
+    
+    //Relatorios:
+    private JMenuItem menuItemRelatoriosFuncionarios;
+    private JMenuItem menuItemRelatoriosDespesa;
+    private JMenuItem menuItemRelatoriosProdutosEstoque;
+    private JMenuItem menuItemRelatoriosProdutosMaisVendidos;
     
     //Sistema:
     private JMenuItem menuItemSistemaSobre;
@@ -93,10 +112,14 @@ public class ViewMenu extends View {
         
         this.createMenuCadastro();
         this.createMenuConsulta();
+        this.createMenuOperacoes();
+        this.createMenuRelatorio();
         this.createMenuSistema();
         
         this.menuBar.add(this.menuCadastro);
         this.menuBar.add(this.menuConsulta);
+        this.menuBar.add(this.menuOperacoes);
+        this.menuBar.add(this.menuRelatorios);
         this.menuBar.add(this.menuSistema);
         
         this.setJMenuBar(this.menuBar);
@@ -183,16 +206,82 @@ public class ViewMenu extends View {
     }
     
     /**
+     * Metodo responsavel por criar o Menu de Operacoes ao Frame.
+     * @since 24/12/2015
+     */
+    private void createMenuOperacoes() {
+        this.menuOperacoes              = new JMenu("Operacoes");
+        
+        this.menuItemOperacoesRegistrarPedido     = this.createMenuItem("Registrar Pedido"     , "solicitar_pedido.jpg");
+        this.menuItemOperacoesRegistrarPedido.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.ALT_MASK));
+        this.menuItemOperacoesChegadaPedido       = this.createMenuItem("Chegada Pedido"       , "chegada_pedido.jpg");
+        this.menuItemOperacoesChegadaPedido.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.ALT_MASK));
+        this.menuItemOperacoesOrganizarHorario    = this.createMenuItem("Organizar Horarios"   , "organizar_horario.jpg");
+        this.menuItemOperacoesOrganizarHorario.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, InputEvent.ALT_MASK));
+        this.menuItemOperacoesRealizarNotificacao = this.createMenuItem("Realizar Notificacoes", "realizar_notificacao.jpg");
+        this.menuItemOperacoesRealizarNotificacao.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.ALT_MASK));
+        this.menuItemOperacoesEfetuarVenda        = this.createMenuItem("Efetuar Venda"        , "efetuar_venda.jpg");
+        this.menuItemOperacoesEfetuarVenda.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.ALT_MASK));
+        this.menuItemOperacoesEfetuarDevolucao    = this.createMenuItem("Efetuar Devolucao"    , "efetuar_devolucao.jpg");
+        this.menuItemOperacoesEfetuarDevolucao.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.ALT_MASK));
+        this.menuItemOperacoesGerenciarEncomenda  = this.createMenuItem("Gerenciar Encomenda"  , "gerenciar_encomenda.jpg");
+        this.menuItemOperacoesGerenciarEncomenda.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.ALT_MASK));
+        this.menuItemOperacoesGerenciarProduto    = this.createMenuItem("Gerenciar Produto"    , "gerenciar_produto.jpg");
+        this.menuItemOperacoesGerenciarProduto.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.ALT_MASK));
+        this.menuItemOperacoesGerenciarUsuario    = this.createMenuItem("Gerenciar Usuario"    , "gerenciar_usuario.jpg");
+        this.menuItemOperacoesGerenciarUsuario.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_U, InputEvent.ALT_MASK));
+        
+        this.menuOperacoes.add(this.menuItemOperacoesRegistrarPedido);
+        this.menuOperacoes.add(this.menuItemOperacoesChegadaPedido);
+        this.menuOperacoes.add(this.menuItemOperacoesOrganizarHorario);
+        this.menuOperacoes.add(this.menuItemOperacoesRealizarNotificacao);
+        this.menuOperacoes.add(this.menuItemOperacoesEfetuarVenda);
+        this.menuOperacoes.add(this.menuItemOperacoesEfetuarDevolucao);
+        this.menuOperacoes.add(this.menuItemOperacoesGerenciarEncomenda);
+        this.menuOperacoes.add(this.menuItemOperacoesGerenciarProduto);
+        this.menuOperacoes.add(this.menuItemOperacoesGerenciarUsuario);
+    }
+    
+    /**
+     * Metodo responsavel por criar o menu de relatorios ao Frame.
+     * @since 14/10/2015
+     */
+    private void createMenuRelatorio() {
+        this.menuRelatorios                         = new JMenu("Relatorios");
+        
+        this.menuItemRelatoriosProdutosMaisVendidos = this.createMenuItem("Produtos Mais Vendidos", "pdf.jpg");
+        this.menuItemRelatoriosProdutosMaisVendidos.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.SHIFT_MASK));
+        this.menuItemRelatoriosProdutosEstoque      = this.createMenuItem("Produtos Em Estoque"   , "pdf.jpg");
+        this.menuItemRelatoriosProdutosEstoque.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.SHIFT_MASK));
+        this.menuItemRelatoriosFuncionarios         = this.createMenuItem("Funcionarios"          , "pdf.jpg");
+        this.menuItemRelatoriosFuncionarios.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.SHIFT_MASK));
+        this.menuItemRelatoriosDespesa              = this.createMenuItem("Despesas"              , "pdf.jpg");
+        this.menuItemRelatoriosDespesa.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.SHIFT_MASK));
+        
+        this.menuRelatorios.add(this.menuItemRelatoriosProdutosMaisVendidos);
+        this.menuRelatorios.addSeparator();
+        this.menuRelatorios.add(this.menuItemRelatoriosProdutosEstoque);
+        this.menuRelatorios.addSeparator();
+        this.menuRelatorios.add(this.menuItemRelatoriosFuncionarios);
+        this.menuRelatorios.addSeparator();
+        this.menuRelatorios.add(this.menuItemRelatoriosDespesa);
+    }
+    
+    /**
      * Metodo responsavel por criar o menu de sistema ao Frame.
      * @since 14/10/2015
      */
     private void createMenuSistema() {
-        this.menuSistema             = new JMenu("Sistema");
+        this.menuSistema                = new JMenu("Sistema");
         
         this.menuItemSistemaSobre       = this.createMenuItem("Sobre"       , "sistema_sobre.jpg");
+        this.menuItemSistemaSobre.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I, InputEvent.SHIFT_MASK));
         this.menuItemSistemaTrocarSenha = this.createMenuItem("Trocar Senha", "sistema_password.jpg");
+        this.menuItemSistemaTrocarSenha.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T, InputEvent.SHIFT_MASK));
         this.menuItemSistemaLogoff      = this.createMenuItem("Logoff"      , "sistema_logoff.jpg");
+        this.menuItemSistemaLogoff.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, InputEvent.SHIFT_MASK));
         this.menuItemSistemaSair        = this.createMenuItem("Sair"        , "sistema_sair.jpg");
+        this.menuItemSistemaSair.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.SHIFT_MASK));
         
         this.menuSistema.add(this.menuItemSistemaSobre);
         this.menuSistema.addSeparator();
@@ -279,7 +368,59 @@ public class ViewMenu extends View {
     public JMenuItem getMenuItemConsultaProduto() {
         return this.menuItemConsultaProduto;
     }
+    
+    public JMenuItem getMenuItemOperacoesRegistrarPedido() {
+        return this.menuItemOperacoesRegistrarPedido;
+    }
 
+    public JMenuItem getMenuItemOperacoesChegadaPedido() {
+        return this.menuItemOperacoesChegadaPedido;
+    }
+
+    public JMenuItem getMenuItemOperacoesOrganizarHorario() {
+        return this.menuItemOperacoesOrganizarHorario;
+    }
+
+    public JMenuItem getMenuItemOperacoesRealizarNotificacao() {
+        return this.menuItemOperacoesRealizarNotificacao;
+    }
+
+    public JMenuItem getMenuItemOperacoesEfetuarVenda() {
+        return this.menuItemOperacoesEfetuarVenda;
+    }
+
+    public JMenuItem getMenuItemOperacoesEfetuarDevolucao() {
+        return this.menuItemOperacoesEfetuarDevolucao;
+    }
+
+    public JMenuItem getMenuItemOperacoesGerenciarEncomenda() {
+        return this.menuItemOperacoesGerenciarEncomenda;
+    }
+
+    public JMenuItem getMenuItemOperacoesGerenciarProduto() {
+        return this.menuItemOperacoesGerenciarProduto;
+    }
+
+    public JMenuItem getMenuItemOperacoesGerenciarUsuario() {
+        return this.menuItemOperacoesGerenciarUsuario;
+    }
+
+    public JMenuItem getMenuItemRelatoriosFuncionarios() {
+        return this.menuItemRelatoriosFuncionarios;
+    }
+
+    public JMenuItem getMenuItemRelatoriosDespesa() {
+        return this.menuItemRelatoriosDespesa;
+    }
+
+    public JMenuItem getMenuItemRelatoriosProdutosEstoque() {
+        return this.menuItemRelatoriosProdutosEstoque;
+    }
+
+    public JMenuItem getMenuItemRelatoriosProdutosMaisVendidos() {
+        return this.menuItemRelatoriosProdutosMaisVendidos;
+    }
+    
     public JMenuItem getMenuItemSistemaSobre() {
         return this.menuItemSistemaSobre;
     }
